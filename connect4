@@ -66,34 +66,49 @@ def checkWin(currPlayer):
 
 os.system("clear")
 
+keepPlaying = True
+while keepPlaying:
+    while True: 
+        drawBoard()
+        if currPlayer == 1:
+            print ("\n It is 🔴's turn")
+        else:
+            print ("\n It is 🔵's turn")
+        
+        location = input ("Where would you like to go?: ")
+        addPiece(int(location), currPlayer)
+        os.system("clear")
+        
+        if checkWin(currPlayer):
+            os.system("clear")
+            if currPlayer == 1:
+                print("Red has won!")
+            else:
+                print("Blue has won!")
+            print()
+            drawBoard()
+            playAgain = input("Would you like to play again (y or n)?:  ")
+            if playAgain[0].lower( ) != "y":
+                keepPlaying = False
+                print()
+                print{"Thank you for playing."}
+            break    
+        
+        if currPlayer == 1:
+            currPlayer= 2
+        elif currPlayer == 2:
+            currPlayer = 1
 
-while True: 
-  drawBoard()
-  if currPlayer == 1:
-    print ("\n It is 🔴's turn")
-  else:
-    print ("\n It is 🔵's turn")
-  
-  location = input ("Where would you like to go?: ")
-  addPiece(int(location), currPlayer)
-  os.system("clear")
-  
-  if checkWin(currPlayer):
-    os.system("clear")
-    if currPlayer == 1:
-      print("Red has won!")
-    else:
-      print("Blue has won!")
-    print()
-    drawBoard()
-    break
+    board = [[0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0]]
+    currPlayer == 1
 
-  
-  if currPlayer == 1:
-    currPlayer= 2
-  elif currPlayer == 2:
-    currPlayer = 1
-  
+    os.system("clear") 
+
 #if checkWin(currPlayer):
 #  playAgain = input ("Would you like to play again (yes or no)? ")
 #  if playAgain == "yes":
