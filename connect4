@@ -1,129 +1,127 @@
 import os
 import sys
 
-
-board = [[0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0]]
-
-#newBoard = [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
-#           [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
-  #         [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
-   #        [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
-    #       [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
-     #      [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
-
-currPlayer = 1
-
-
-def drawBoard():
-  print(" 1 2 3 4 5 6 7")
-  
-  for row in board:
-    for item in row:
-      if item == 0:
-        print ("⬜", end="")
-      elif item == 1:
-        print ("🔴", end="")
-      else:
-        print ("🔵", end="")
-      
-    print("")
-
-def addPiece(location, currPlayer):
-  for i in range(6):
-    if board [5-i][location-1] == 0:
-      board [5-i][location-1] = currPlayer
-      break
-    
-    
-def checkWin(currPlayer):
-  for i in range(7):
-    for j in range(3):
-      if board[0+j][i] == currPlayer and board[1+j][i] == currPlayer and board[2+j][i] == currPlayer and board[3+j][i] == currPlayer:
-        return True
-  
-  for k in range(6):
-    for l in range(4):
-      if board[k][0+l] == currPlayer and board[k][1+l] == currPlayer and board[k][2+l] == currPlayer and board[k][3+l] == currPlayer:
-        return True
-        
-  for i in range (3):
-    for j in range (4):
-      if board[i][j] == currPlayer and board[1+i][1+j] == currPlayer and board[2+i][2+j] ==currPlayer and board[3+i][3+j] == currPlayer:
-       return True
-  for i in range (3):
-    for j in range (4):
-      if board[i][3+j] == currPlayer and board [1+i][2+j] == currPlayer and board[2+i][1+j] == currPlayer and board[3+i][j] == currPlayer:
-        return True
-  
-  else:
-    return False
-  
-
-os.system("clear")
-
 keepPlaying = True
 while keepPlaying:
-    while True: 
-        drawBoard()
-        if currPlayer == 1:
-            print ("\n It is 🔴's turn")
+  board = [[0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0]]
+  
+  #newBoard = [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
+  #           [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
+    #         [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
+     #        [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
+      #       [🔴,🔵,🔴,🔵,🔴,🔵,🔴],
+       #      [🔵,🔴,🔵,🔴,🔵,🔴,🔵]
+  
+  currPlayer = 1
+  
+  
+  def drawBoard():
+    print(" 1 2 3 4 5 6 7")
+    
+    for row in board:
+      for item in row:
+        if item == 0:
+          print ("⬜", end="")
+        elif item == 1:
+          print ("🔴", end="")
         else:
-            print ("\n It is 🔵's turn")
+          print ("🔵", end="")
         
-        location = input ("Where would you like to go?: ")
-        addPiece(int(location), currPlayer)
+      print("")
+  
+  def addPiece(location, currPlayer):
+    for i in range(6):
+      if board [5-i][location-1] == 0:
+        board [5-i][location-1] = currPlayer
+        break
+      
+      
+  def checkWin(currPlayer):
+    for i in range(7):
+      for j in range(3):
+        if board[0+j][i] == currPlayer and board[1+j][i] == currPlayer and board[2+j][i] == currPlayer and board[3+j][i] == currPlayer:
+          return True
+    
+    for k in range(6):
+      for l in range(4):
+        if board[k][0+l] == currPlayer and board[k][1+l] == currPlayer and board[k][2+l] == currPlayer and board[k][3+l] == currPlayer:
+          return True
+          
+    for i in range (3):
+      for j in range (4):
+        if board[i][j] == currPlayer and board[1+i][1+j] == currPlayer and board[2+i][2+j] ==currPlayer and board[3+i][3+j] == currPlayer:
+         return True
+    for i in range (3):
+      for j in range (4):
+        if board[i][3+j] == currPlayer and board [1+i][2+j] == currPlayer and board[2+i][1+j] == currPlayer and board[3+i][j] == currPlayer:
+          return True
+    
+    else:
+      return False
+    
+  
+  os.system("clear")
+  
+
+  
+  while True:
+    if checkWin(2 if currPlayer == 1 else 1):
+      os.system("clear")
+      if currPlayer == 2:
+        print("Red has won!")
+      else:
+        print("Blue has won!")
+      print()
+      drawBoard()
+      
+      playAgain = input ("Would you like to play again (yes or no)? ")
+      if playAgain[0].lower() == "n":
+        keepPlaying = False
+        print ("Thank you for playing")
+        break
+      if playAgain[0].lower() == "y":
+        break
+
+    drawBoard()
+    if currPlayer == 1:
+      print ("\n It is 🔴's turn")
+    else:
+      print ("\n It is 🔵's turn")
+    
+    location = input ("Where would you like to go?: ")
+    try:
+      if int(location) <1 or int(location) > 7:
         os.system("clear")
-        
-        if checkWin(currPlayer):
-            os.system("clear")
-            if currPlayer == 1:
-                print("Red has won!")
-            else:
-                print("Blue has won!")
-            print()
-            drawBoard()
-            playAgain = input("Would you like to play again (y or n)?:  ")
-            if playAgain[0].lower( ) != "y":
-                keepPlaying = False
-                print()
-                print{"Thank you for playing."}
-            break    
-        
-        if currPlayer == 1:
-            currPlayer= 2
-        elif currPlayer == 2:
-            currPlayer = 1
-
-    board = [[0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0]]
-    currPlayer == 1
-
-    os.system("clear") 
-
-#if checkWin(currPlayer):
-#  playAgain = input ("Would you like to play again (yes or no)? ")
-#  if playAgain == "yes":
-#    continue
-#  else:
-#    print("Thank you for playing")
-#    break
-
-
-#if currPlayer == 1:
-#  print ("🔴's turn")
-#elif currPlayer == 2:
-#  print ("🔵's turn")
+        print ("Invalid location to play")
+        print()
+        continue
+    except:
+      os.system("clear")
+      print("Please enter a number")
+      print()
+      continue
+    addPiece(int(location), currPlayer)
+    os.system("clear")
+    
+    if currPlayer == 1:
+      currPlayer= 2
+    elif currPlayer == 2:
+      currPlayer = 1
+    
+    
   
   
-# HW:make it so each time you add a piece, it changes color 
-
-#HW: make it so when someone wins, they can play again
+  #if currPlayer == 1:
+  #  print ("🔴's turn")
+  #elif currPlayer == 2:
+  #  print ("🔵's turn")
+    
+    
+  # HW:make it so each time you add a piece, it changes color 
+  
+  #HW: make it so when someone wins, they can play again
